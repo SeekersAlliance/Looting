@@ -1,17 +1,17 @@
 <html lang="en">
   <head>
-    <link rel="icon" href="../favicon.ico">
-    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
-    <link rel="shortcut icon" href="../img/android-chrome-192x192.png">
+    <link rel="icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="./img/android-chrome-192x192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../globe.css">
+    <link rel="stylesheet" type="text/css" href="./globe.css">
     <title>Seekers Alliance</title>
     <style>
 
       #getcard {
-        background-image: url("../img/victory_back.png");
+        background-image: url("./img/victory_back.png");
         display: flex;
         flex-wrap: nowrap;
         justify-content: flex-start;
@@ -48,7 +48,8 @@
       .card-rainbow, .card-twinkle {
         width: 100%;
         height: auto;
-        aspect-ratio: 676 / 1004;        
+        aspect-ratio: 676 / 1004;
+        max-height: 100vh;
         position: relative;
         display: flex;
         flex-wrap: wrap;
@@ -243,36 +244,54 @@
         }
       }
 
+      @media screen and (max-width: 1000px) {
+        .card-rainbow > a > img {
+          height: 50vw;
+          max-height: 100vh;
+        }
+      }
+
+      @media (min-aspect-ratio: 2.25 / 1) {
+        .card-rainbow > a, .card-twinkle > a {
+          top: 0vw;
+        }
+        .card-twinkle {
+          margin-top: -15vh;
+        }
+        .card-twinkle > img {
+          margin: 40vh 35% 0 0;
+        }
+
+      }
       </style>
   </head>
   <body>
     <div id="getcard" class="container-block bgsize">
       <div id="getcard-get">
-        <img src="../img/card_looted.png" />
+        <img src="./img/card_looted.png" />
       </div>
       <div id="getcard-card">
         <div class="card-rainbow">
-          <a class="card-rainbow-c"><img src="../img/card_looted_galahad.png" /></a>
-          <a class="card-rainbow-r"><img src="../img/rainbow_back01.png" /></a>
-          <a class="card-rainbow-r"><img src="../img/rainbow_back02.png" /></a>
-          <a class="card-rainbow-r"><img src="../img/rainbow_back03.png" /></a>
-          <a class="card-rainbow-r"><img src="../img/rainbow_back04.png" /></a>
+          <a class="card-rainbow-c"><img src="./img/card_looted_galahad.png" /></a>
+          <a class="card-rainbow-r"><img src="./img/rainbow_back01.png" /></a>
+          <a class="card-rainbow-r"><img src="./img/rainbow_back02.png" /></a>
+          <a class="card-rainbow-r"><img src="./img/rainbow_back03.png" /></a>
+          <a class="card-rainbow-r"><img src="./img/rainbow_back04.png" /></a>
         </div>
       </div>
       <div id="getcard-star">
         <div class="card-twinkle">
-          <img src="../img/card_looted_rare.png" />
-          <!--<a class="card-twinkle-c"></a>-->
-          <a class="card-twinkle-t t01"><img src="../img/card_looted_star.png" /></a>
-          <a class="card-twinkle-t t02"><img src="../img/card_looted_star.png" /></a>
-          <a class="card-twinkle-t t03"><img src="../img/card_looted_star.png" /></a>
-          <a class="card-twinkle-t t04"><img src="../img/card_looted_star.png" /></a>
-          <a class="card-twinkle-t t05"><img src="../img/card_looted_star.png" /></a>
-          <a class="card-twinkle-t t06"><img src="../img/card_looted_star.png" /></a>
-          <a class="card-twinkle-t t07"><img src="../img/card_looted_star.png" /></a>
-          <a class="card-twinkle-t t08"><img src="../img/card_looted_star.png" /></a>
-          <a class="card-twinkle-t t09"><img src="../img/card_looted_star.png" /></a>
-          <a class="card-twinkle-t t10"><img src="../img/card_looted_star.png" /></a>
+          <img src="./img/card_looted_rare.png" />
+          <a class="card-twinkle-t t01"><img src="./img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t02"><img src="./img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t03"><img src="./img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t04"><img src="./img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t05"><img src="./img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t06"><img src="./img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t07"><img src="./img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t08"><img src="./img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t09"><img src="./img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t10"><img src="./img/card_looted_star.png" /></a>
         </div>
       </div>
    </div>
