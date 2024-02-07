@@ -1,0 +1,280 @@
+<html lang="en">
+  <head>
+    <link rel="icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="../img/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../globe.css">
+    <title>Seekers Alliance</title>
+    <style>
+
+      #getcard {
+        background-image: url("../img/victory_back.png");
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-content: center;
+      }
+      #getcard.bgsize {
+        background-position: center center;
+      }
+      #getcard #getcard-get {
+        width: 30%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-content: center;
+      }
+      #getcard #getcard-card {
+        width: 40%;
+        display: inline-block;
+      }
+      #getcard #getcard-star {
+        width: 30%;
+        display: inline-block;
+      }
+
+      #getcard-get img {
+        height: 25.5%;
+        margin-top: 17%;
+      }
+      /*#getcard-card img {
+        height: 96%;
+      }
+*/
+
+      .card-rainbow, .card-twinkle {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 676 / 1004;        
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+      }
+      .card-rainbow > a, .card-twinkle > a {
+        position: absolute;
+        display: block;
+        top: 2.5vw;
+        left: unset;
+      }
+      /*------------card-raibow------------*/
+      .card-rainbow > a > img {
+        height: 52.5vw;
+      }
+      .card-rainbow > a.card-rainbow-c {
+        z-index: 5;
+      }
+      .card-rainbow > a.card-rainbow-r {
+        opacity: 0;
+        animation: rainbow .6s linear infinite;
+      }
+      .card-rainbow > a.card-rainbow-r:nth-child(2) {
+        animation-delay: .15s;
+      }
+      .card-rainbow > a.card-rainbow-r:nth-child(3) {
+        animation-delay: .3s;
+      }
+      .card-rainbow > a.card-rainbow-r:nth-child(4) {
+        animation-delay: .45s;
+      }
+      @keyframes rainbow {
+        1% {
+            opacity: 1;
+        }
+        25% {
+            opacity: 1;
+        }
+        26% {
+            opacity: 0;
+        }
+      }
+
+      /*------------card-twinkle------------*/
+      .card-twinkle {
+        aspect-ratio: 639.93 / 1080;
+      }
+      .card-twinkle > img{
+        height: 15%;
+        margin: 18% 35% 0 0;
+        z-index: 10;
+      }
+      .card-twinkle > a.card-twinkle-t {
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      .card-twinkle > a {
+        aspect-ratio: 1 / 1;
+      }
+      .card-twinkle > a img {
+        width: 100%;
+      }
+      .card-twinkle > a.t01 {
+        width: 11vw;
+        animation-name: rainbow1;
+        animation-duration: 1.5s;
+        opacity: 1;
+        margin: 47% 38% 0 0;
+      }
+      .card-twinkle > a.t02 {
+        width: 16vw;
+        animation-name: rainbow2;
+        animation-duration: 1.5s;
+        opacity: 0;
+        margin: 59% 60% 0 0;
+        animation-timing-function: ease-in-out;
+      }
+      .card-twinkle > a.t03 {
+        width: 9vw;
+        animation-name: rainbow3;
+        animation-duration: 1.5s;
+        opacity: 0;
+        margin: 80% 2% 0 0%;
+      }
+      .card-twinkle > a.t04 {
+        width: 7vw;
+        animation-name: rainbow4;
+        animation-duration: 1.3s;
+        opacity: 1;
+        margin: 92% 50% 0 0;
+      }
+      .card-twinkle > a.t05 {
+        width: 1vw;
+        animation-name: rainbow4;
+        animation-duration: .7s;
+        opacity: 1;
+        margin: 57% 26% 0 0;
+      }
+      .card-twinkle > a.t06, .card-twinkle > a.t07 {
+        width: 2.5vw;
+        animation-name: rainbow2;
+        animation-duration: 1s;
+        opacity: 0;
+        margin: 70% 73% 0 0;
+      }
+      .card-twinkle > a.t07 {
+        animation-delay: .2s;
+        margin: 72% 8% 0 0;
+      }
+      .card-twinkle > a.t08 {
+        width: 2vw;
+        animation-name: rainbow3;
+        animation-duration: .9s;
+        opacity: 0;
+        margin: 89% 40% 0 0;
+      }
+      .card-twinkle > a.t09, .card-twinkle > a.t10 {
+        width: 1.5vw;
+        animation-name: rainbow1;
+        animation-duration: .8s;
+        opacity: 1;
+        margin: 90% 68% 0 0;
+      }
+      .card-twinkle > a.t10 {
+        animation-delay: .2s;
+        margin: 106% 30% 0 0;
+      }
+
+
+      @keyframes rainbow1 {
+        40% {
+            opacity: 0.6;
+        }
+        50% {
+            opacity: 0;
+        }
+        60% {
+            opacity: 0;
+        }
+        80% {
+            opacity: 0.9;
+        }
+        100% {
+            opacity: 1;
+        }
+      }
+      @keyframes rainbow2 {
+        50% {
+          opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+      }
+      @keyframes rainbow3 {
+        35% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 0.8;
+        }
+        100% {
+            opacity: 0;
+        }
+      }
+      @keyframes rainbow4 {
+        0% {
+            opacity: 1;
+        }
+        30% {
+            opacity: 0.2;
+        }
+        40% {
+            opacity: 0;
+        }
+        60% {
+            opacity: 0;
+        }
+        80% {
+            opacity: 0.8;
+        }
+        100% {
+            opacity: 1;
+        }
+      }
+
+      </style>
+  </head>
+  <body>
+    <div id="getcard" class="container-block bgsize">
+      <div id="getcard-get">
+        <img src="../img/card_looted.png" />
+      </div>
+      <div id="getcard-card">
+        <div class="card-rainbow">
+          <a class="card-rainbow-c"><img src="../img/card_looted_galahad.png" /></a>
+          <a class="card-rainbow-r"><img src="../img/rainbow_back01.png" /></a>
+          <a class="card-rainbow-r"><img src="../img/rainbow_back02.png" /></a>
+          <a class="card-rainbow-r"><img src="../img/rainbow_back03.png" /></a>
+          <a class="card-rainbow-r"><img src="../img/rainbow_back04.png" /></a>
+        </div>
+      </div>
+      <div id="getcard-star">
+        <div class="card-twinkle">
+          <img src="../img/card_looted_rare.png" />
+          <!--<a class="card-twinkle-c"></a>-->
+          <a class="card-twinkle-t t01"><img src="../img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t02"><img src="../img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t03"><img src="../img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t04"><img src="../img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t05"><img src="../img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t06"><img src="../img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t07"><img src="../img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t08"><img src="../img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t09"><img src="../img/card_looted_star.png" /></a>
+          <a class="card-twinkle-t t10"><img src="../img/card_looted_star.png" /></a>
+        </div>
+      </div>
+   </div>
+  </body>
+</html>

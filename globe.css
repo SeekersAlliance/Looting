@@ -31,7 +31,7 @@ a, a:hover, a:active {
 }
 
 
-#index, #v-wallet, #character-box, #loading, #reward {
+#index, #v-wallet, #character-box, #loading, #getcard {
     width: 100%;
     height: auto;
     min-width: 1000px;
