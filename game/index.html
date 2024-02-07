@@ -1,0 +1,96 @@
+<html lang="en">
+  <head>
+    <link rel="icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="../img/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../globe.css">
+    <title>Seekers Alliance</title>
+    <style>
+
+      #loading {
+        background-image: url("../img/loading_bg.png");
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-content: flex-end;
+      }
+      #loading-text-box {
+        width: fit-content;
+        height: fit-content;
+        text-align: right;
+        padding: 0 1vw 1.5vw 0;
+      }
+      #loading-text-box img{
+        width: calc(100% / 15);
+      }
+
+      @keyframes dotBlink {
+        13% {
+          opacity: 0;
+        }
+        18% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes dotBlink2 {
+        38% {
+          opacity: 0;
+        }
+        43% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes dotBlink3 {
+        68% {
+          opacity: 0;
+        }
+        73% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      #loading-dot1, #loading-dot2, #loading-dot3 {
+        opacity: 0;
+        animation-iteration-count: infinite;
+        animation-duration: 4s;
+      }
+      #loading-dot1{
+        animation-name: dotBlink;
+      }
+      #loading-dot2{
+        animation-name: dotBlink2;
+      }
+      #loading-dot3{
+        animation-name: dotBlink3;
+      }
+      </style>
+  </head>
+  <body>
+    <div id="loading" class="container-block bgsize">
+      <div id="loading-text-box">
+        <img src="../img/loading-arrow.png" />
+        <img src="../img/loading-L.png" />
+        <img src="../img/loading-O.png" />
+        <img src="../img/loading-A.png" />
+        <img src="../img/loading-D.png" />
+        <img src="../img/loading-I.png" />
+        <img src="../img/loading-N.png" />
+        <img src="../img/loading-G.png" />
+        <img src="../img/loading-dot.png" id="loading-dot1" />
+        <img src="../img/loading-dot.png" id="loading-dot2" />
+        <img src="../img/loading-dot.png" id="loading-dot3" />
+      </div>
+    </div>
+  </body>
+</html>

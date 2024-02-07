@@ -1,0 +1,42 @@
+html, body{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    /*overflow: hidden;*/
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #000000;
+}
+img {
+    border: 0px;
+}
+a, a:hover, a:active {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.bgsize {
+    background-size: 100% auto; 
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    -o-background-size: 100% auto;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+.web-line {
+    margin: 0px auto;
+}
+.web-button {
+    margin: 0px auto;
+}
+
+
+#index, #v-wallet, #character-box, #loading, #reward {
+    width: 100%;
+    height: auto;
+    min-width: 1000px;
+    max-height: 100vh;
+    aspect-ratio: 16 / 9;
+    background-color: black;
+}
+

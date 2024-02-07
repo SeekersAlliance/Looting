@@ -1,0 +1,52 @@
+<html lang="en">
+  <head>
+    <link rel="icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="./img/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./globe.css">
+    <title>Seekers Alliance</title>
+    <style>
+
+      #index {
+        background-image: url("./img/connect_wallet_bg.jpg");
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-end;
+      }
+
+      a:has(#index-connect-button) {
+        width: 100%;
+      }
+      #index-connect-button {
+        width: 40%;
+        height: auto;
+        aspect-ratio: 159 / 71;
+        max-width: 759px;
+        max-height: 355px;
+        margin: 0% auto 0px;
+        display: block;
+      }
+      #index-introduce {
+        width: 40%;
+        height: auto;
+        aspect-ratio: 151 / 19;
+        padding:0 30% 5vw;
+      }
+
+
+
+      </style>
+  </head>
+  <body>
+    <div id="index" class="container-block bgsize">
+      <a href="./view-wallet.html" target="_self">
+        <img src="./img/connect_wallet_button.png" id="index-connect-button" />
+      </a>
+      <img src="./img/connect_wallet_txt.png" id="index-introduce" />
+   </div>
+  </body>
+</html>

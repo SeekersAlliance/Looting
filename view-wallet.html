@@ -1,0 +1,208 @@
+<html lang="en">
+  <head>
+    <link rel="icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="./img/android-chrome-192x192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./globe.css">
+    <title>Seekers Alliance</title>
+    <style>
+
+      #v-wallet {
+        background-image: url("./img/connect_wallet_bg.jpg");
+        display: flex;
+        flex-wrap: wrap;
+        justify-items: center;
+        align-content: center;
+      }
+      #v-wallet-connect-button {
+        width: 40%;
+        height: auto;
+        aspect-ratio: 159 / 71;
+        max-width: 759px;
+        max-height: 355px;
+        margin: 18.55% auto 0px;
+        display: block;
+      }
+
+      #character-box {
+        position: absolute;
+        top: 0vw;
+        left: 0vw;
+        background-color: rgba(0, 0, 0, 0.75);
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-end;
+
+      }
+      #character {
+        width: 97%;
+        height: fit-content;
+        padding-bottom: 6.6vw;
+      }
+      #character > .character-self-box {
+        width: 20%;
+        height: auto;
+        aspect-ratio: 380 / 565;
+        vertical-align: middle;
+        margin-bottom: -1vw;
+        float: left;
+      }
+      #character > .character-self-text {
+        width: 20%;
+        min-height: 8vw;
+        text-align: center;
+        float: left;
+      }
+      .character-self-text.bgsize {
+        background-position: center bottom;
+      }
+      .character-self-text.bg-common {
+        background-image: url("./img/common.png");
+        background-size: 81.5% auto;
+        -webkit-background-size: 81.5% auto;
+      }
+      .character-self-text.bg-uncommon {
+        background-image: url("./img/uncommon.png");
+        background-size: 100% auto;
+        -webkit-background-size: 100% auto;
+      }
+      .character-self-text.bg-rare {
+        background-image: url("./img/rare.png");
+        background-size: 56% auto;
+        -webkit-background-size: 56% auto;
+      }
+
+      .character-self-box img {
+        width: 100%;
+      }
+
+      .character-self-box::after, .character-self-box::before {
+        width: 18.5vw;
+        height: 18.5vw;
+        content:"";
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+        mix-blend-mode: normal;
+      }
+      .character-self-box::after {
+        opacity: 0;
+        background-image: url("./img/target1_upper_layer.png");
+        margin: 5.5vw 0 0 -19vw;
+        z-index: 2;
+      }
+      .character-self-box::before {
+        opacity: 0;
+        background-image: url("./img/target2_lower_layer.png");
+        margin: 5.5vw 0 0 0.38vw;
+        z-index: 3;
+      }
+      .showt::after {
+        animation-name: checkgo1;
+        animation-iteration-count: 1;
+        animation-duration: .5s;
+        animation-fill-mode: forwards;
+      }
+      .showt::before {
+        animation-name: checkgo2;
+        animation-iteration-count: 1;
+        animation-duration: .3s;
+        animation-delay: .5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes checkgo1 {
+        50% {
+          opacity: 1;
+        }
+        70% {
+          opacity: 1;
+        }
+        72% {
+          opacity: 0;
+        }
+        89% {
+          opacity: 0;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes checkgo2 {
+  		  0%{
+          opacity: 1;
+		      transform: scale(2);
+		    }
+		    50%{
+		      transform: scale(2.5);
+		    }
+		    75%{
+		      transform: scale(1.25);
+		    }
+		    100%{
+          opacity: 1;
+		      transform: scale(1);
+		    }
+	    }
+
+    @media screen and (max-width:998px) {
+      .character-self-box::before {
+        margin: 5.5vw 0 0 0.7%;
+      }
+    }
+
+      </style>
+  </head>
+  <body>
+    <div id="v-wallet" class="container-block bgsize">
+      <img src="./img/view_opponent_wallet_button.png" id="v-wallet-connect-button" onclick="choosechar()" />
+    </div>
+    <div id="character-box" style="display: none;">
+      <div id="character">
+        <div id="char1" class="character-self-box">
+          <img src="./img/bubble_gunner.png" />
+        </div>
+        <div id="char2" class="character-self-box">
+          <img src="./img/meta_whelp.png" />
+        </div>
+        <div id="char3" class="character-self-box">
+          <img src="./img/double_agent.png" />
+        </div>
+        <div id="char4" class="character-self-box">
+          <img src="./img/morak_galahad.png" />
+        </div>
+        <div id="char5" class="character-self-box">
+          <img src="./img/dragon_speaker.png" />
+        </div>
+        <div class="character-self-text bg-common bgsize"></div>
+        <div class="character-self-text bg-uncommon bgsize"></div>
+        <div class="character-self-text bg-uncommon bgsize"></div>
+        <div class="character-self-text bg-rare bgsize"></div>
+        <div class="character-self-text bg-common bgsize"></div>
+      </div>
+    </div>
+    <script>
+      function choosechar(){
+        document.getElementById("character-box").style.display = "flex";
+      };
+
+      var checkchar = document.querySelector('#character');
+      checkchar.addEventListener('click' , function(){
+        var checkid = event.target;
+        document.getElementById(checkid.id).classList.add("showt");
+        if (checkid.id == "char4"){
+          setTimeout(() => {
+            window.location.href = "./game/index.html";
+          }, 1000);
+        }
+      })
+
+    </script>
+  </body>
+</html>
