@@ -1,0 +1,14 @@
+{
+  "name": "looting",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "bundle": "bun build.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
