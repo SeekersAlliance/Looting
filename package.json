@@ -3,10 +3,12 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "bundle": "bun build.js"
+    "bundle": "bun build.js",
+    "dev": "bun build.js watch"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "chokidar": "^3.6.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

@@ -1,3 +1,7 @@
-import { pi } from './utils/helper';
+import { injectHandler } from './utils/helper';
 
-console.log('Hello from Connect', pi);
+const connectWallet = () => {
+  console.log('connect wallet!');
+};
+
+injectHandler('index-connect-button', connectWallet)
