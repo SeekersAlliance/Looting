@@ -132,6 +132,9 @@ contract ERC2266 is ERC1155, IERC2266{
         if(!isApprovedForLock(from, sender)) revert InvalidUnLocker(sender);
         
         unlock(from, id, unlockNum);
+        LockStatus memory status = lockStatus[from][id];
+        uint256 nonLocked = balanceOf(from, id) - status.lockednum;
+        if(transferNum > nonLocked) revert Locked(from, id, status.locker, status.lockednum, status.expired);
         _safeTransferFrom(from, to, id, transferNum, data);
     }
 
@@ -147,6 +150,18 @@ contract ERC2266 is ERC1155, IERC2266{
         if(!isApprovedForLock(from, sender)) revert InvalidUnLocker(sender);
 
         unlockBatch(from, ids, unlockNums);
+
+        uint256 id; 
+        uint256 value;
+        for(uint256 i;i<ids.length;i++) {
+            id = ids[i];
+            value = transferNums[i];
+            if(_isLocked(from, id)) {
+                LockStatus memory status = lockStatus[from][id];
+                uint256 nonLocked = balanceOf(from, id) - status.lockednum;
+                if(value > nonLocked) revert Locked(from, id, status.locker, status.lockednum, status.expired);
+            }
+        }
         _safeBatchTransferFrom(from, to, ids, transferNums, data);
     }
 
@@ -250,7 +265,7 @@ contract ERC2266 is ERC1155, IERC2266{
             LockStatus storage status = lockStatus[account][id];
             if(value == 0) revert InvalidLockNum(value); 
             if(!_isLocked(account, id)) revert isNotLocked(account, id);
-            if(_isLocked(account, id) && status.locker != locker) revert InvalidLocker(account, locker);
+            if(_isLocked(account, id) && status.locker != locker) revert NotLocker(account, id, locker);
             if(value > status.lockednum) revert InvalidUnLockNum(value); 
             if(value == status.lockednum) {
                 _resetLockStatus(account, id);

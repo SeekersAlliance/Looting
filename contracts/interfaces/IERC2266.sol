@@ -8,6 +8,7 @@ pragma solidity = 0.8.23;
 
 interface IERC2266 {
     error NotApprovedForLock(address from, address locker);
+    error NotLocker(address account, uint256 id, address locker);
     error InvalidLockAccount(address account);
     error InvalidLocker(address account, address locker);
     error InvalidUnLocker(address unlocker);
