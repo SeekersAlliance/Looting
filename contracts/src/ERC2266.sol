@@ -7,7 +7,7 @@ import "../interfaces/IERC2266.sol";
 
 /// @title ERC2266: Lockable Extension for ERC1155
 /// @dev Implementation for the Lockable extension ERC2266 for ERC1155
-/// @author SeekersAlliance 
+/// @author SeekersAlliance
 
 contract ERC2266 is ERC1155, IERC2266{
 
@@ -20,7 +20,7 @@ contract ERC2266 is ERC1155, IERC2266{
         uint256 expired;
     }
 
-    constructor(string memory _baseTokenURI) ERC1155(_baseTokenURI) {
+    constructor(string memory _baseTokenURI) ERC1155("") {
         _setURI(_baseTokenURI);
     }
 
@@ -88,9 +88,7 @@ contract ERC2266 is ERC1155, IERC2266{
         }
 
         if(_isLocked(from, id)) {
-            LockStatus memory status = lockStatus[from][id];
-            uint256 nonLocked = balanceOf(from, id) - status.lockednum;
-            if(value > nonLocked) revert Locked(from, id, status.locker, status.lockednum, status.expired);
+            _checkTransferable(from, id, value);
         }
         _safeTransferFrom(from, to, id, value, data);
     }
@@ -105,16 +103,14 @@ contract ERC2266 is ERC1155, IERC2266{
         address sender = _msgSender();
         if (from != sender && !isApprovedForAll(from, sender)) {
             revert ERC1155MissingApprovalForAll(sender, from); 
-        } 
-        uint256 id; 
+        }
+        uint256 id;
         uint256 value;
         for(uint256 i;i<ids.length;i++) {
             id = ids[i];
             value = values[i];
             if(_isLocked(from, id)) {
-                LockStatus memory status = lockStatus[from][id];
-                uint256 nonLocked = balanceOf(from, id) - status.lockednum;
-                if(value > nonLocked) revert Locked(from, id, status.locker, status.lockednum, status.expired);
+                _checkTransferable(from, id, value);
             }
         }
         _safeBatchTransferFrom(from, to, ids, values, data);
@@ -130,8 +126,11 @@ contract ERC2266 is ERC1155, IERC2266{
     ) public virtual {
         address sender = msg.sender;
         if(!isApprovedForLock(from, sender)) revert InvalidUnLocker(sender);
-        
-        unlock(from, id, unlockNum);
+
+        _unlock(sender, from, id, unlockNum);
+        if(_isLocked(from, id)) {
+                _checkTransferable(from, id, transferNum);
+            }
         _safeTransferFrom(from, to, id, transferNum, data);
     }
 
@@ -146,7 +145,17 @@ contract ERC2266 is ERC1155, IERC2266{
         address sender = msg.sender;
         if(!isApprovedForLock(from, sender)) revert InvalidUnLocker(sender);
 
-        unlockBatch(from, ids, unlockNums);
+        _unlockBatch(sender, from, ids, unlockNums);
+
+        uint256 id; 
+        uint256 value;
+        for(uint256 i;i<ids.length;i++) {
+            id = ids[i];
+            value = transferNums[i];
+            if(_isLocked(from, id)) {
+                _checkTransferable(from, id, value);
+            }
+        }
         _safeBatchTransferFrom(from, to, ids, transferNums, data);
     }
 
@@ -163,6 +172,12 @@ contract ERC2266 is ERC1155, IERC2266{
     function getExpired(address account, uint256 id) public view virtual returns(uint256 expired){
         if(!_isLocked(account, id)) return 0;
         return lockStatus[account][id].expired;
+    }
+
+    function _checkTransferable(address from, uint256 id, uint256 value) internal view {
+        LockStatus memory status = lockStatus[from][id];
+        uint256 nonLocked = balanceOf(from, id) - status.lockednum;
+        if(value > nonLocked) revert Locked(from, id, status.locker, status.lockednum, status.expired);
     }
 
     function _lock(
@@ -248,10 +263,11 @@ contract ERC2266 is ERC1155, IERC2266{
             id = ids[i];
             value = values[i];
             LockStatus storage status = lockStatus[account][id];
-            if(value == 0) revert InvalidLockNum(value); 
+
+            if(value == 0) revert InvalidLockNum(value);
             if(!_isLocked(account, id)) revert isNotLocked(account, id);
-            if(_isLocked(account, id) && status.locker != locker) revert InvalidLocker(account, locker);
-            if(value > status.lockednum) revert InvalidUnLockNum(value); 
+            if(status.locker != locker) revert NotLocker(account, id, locker);
+            if(value > status.lockednum) revert InvalidUnLockNum(value);
             if(value == status.lockednum) {
                 _resetLockStatus(account, id);
             } else {
