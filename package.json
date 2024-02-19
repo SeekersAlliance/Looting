@@ -1,14 +1,15 @@
 {
   "name": "looting",
   "module": "index.ts",
-  "type": "module",
   "scripts": {
     "bundle": "bun build.js",
     "dev": "bun build.js watch"
   },
   "devDependencies": {
+    "@openzeppelin/contracts": "^5.0.1",
     "@types/bun": "latest",
-    "chokidar": "^3.6.0"
+    "chokidar": "^3.6.0",
+    "hardhat": "^2.20.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
