@@ -6,6 +6,7 @@ Therefore, following step is needed to transpile the src:
 
 - Make sure [Bun](https://bun.sh/) is installed via `curl -fsSL https://bun.sh/install | bash`.
 - Run `bun install` to install dependencies (just like npm install)
+- Configuration e.g NFT Manager account, private key, contract address would be find/editable under `src/utils/config.ts`
 - Run `bun build.js` to build executable javascript output (under `/js` folder)
 
 ### Development:
