@@ -4,9 +4,9 @@ import { injectHandler } from "./utils/helper";
 const lockNft = async () => {
   const nftManager = localStorage.getItem('CHALLENGER-ACCOUNT');
   const blockTimestamp = await web3.eth.getBlock("latest");
-  const expired = blockTimestamp.timestamp + BigInt(10);
+  const expired = blockTimestamp.timestamp + BigInt(600);
 
-  const encodeABI = await contract.methods.lock(nftManager, 3, 1, expired).encodeABI();
+  const encodeABI = await contract.methods.lock(nftManager, 4, 1, expired).encodeABI();
   const tx = {
     from: nftManager,
     to: contract._address,
