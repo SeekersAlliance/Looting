@@ -26,11 +26,27 @@ interface IERC2266 {
     event UnLockBatch(address indexed locker, address indexed account, uint256[] indexed ids, uint256[] unlocknums);
 
     /**
-     * @dev Only approvedLock can lock.
+     * @dev Only approvedLock can call lock.
+     * @notice Can not call lock if the id of account is locked and locker is not msg sender.
      */
     function lock(address account, uint256 id, uint256 locknum, uint256 expired) external;
+
+    /**
+     * @dev Only approvedLock can call unlock.
+     * @notice Can not call unlock if the id of account is not locked or locker is not msg sender.
+     */
     function unlock(address account, uint256 id, uint256 unlocknum) external;
+
+    /**
+     * @dev Only approvedLock can call lock.
+     * @notice Batch call lock().
+     */
     function lockBatch(address account, uint256[] memory ids, uint256[] memory locknums, uint256 expired) external;
+    
+    /**
+     * @dev Only approvedLock can call lock.
+     * @notice Batch call unlock().
+     */
     function unlockBatch(address account, uint256[] memory ids, uint256[] memory unlocknums) external;
     function setApprovalForLock(address locker, bool approved) external; 
     function isApprovedForLock(address account, address operator) external view returns (bool);

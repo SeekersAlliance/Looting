@@ -13,7 +13,7 @@ import {ERC2266} from "./ERC2266.sol";
 contract Looting is ERC2266, ILooting, AccessControl {
     string private baseTokenURI;
     uint256 public maxLockTime;
-    address tokenManager;
+    address public tokenManager;
 
     constructor(address _initialAdmin, address _manager, uint256 _maxLockTime, string memory _baseTokenURI) ERC2266("") {
         baseTokenURI = _baseTokenURI;
@@ -45,8 +45,8 @@ contract Looting is ERC2266, ILooting, AccessControl {
     }
 
     function unlock(
-        address account, 
-        uint256 id, 
+        address account,
+        uint256 id,
         uint256 unlocknum
     ) public override (ERC2266, ILooting) {
         address locker = msg.sender;
