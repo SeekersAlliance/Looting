@@ -8,3 +8,6 @@ Therefore, following step is needed to transpile the src:
 - Run `bun install` to install dependencies (just like npm install)
 - Run `bun build.js` to build executable javascript output (under `/js` folder)
 
+### Development:
+- Run `build build.js watch` to watch/rebuild `js` on changes in `src`
+- Run `bun x lr-http-server` to serve project in http

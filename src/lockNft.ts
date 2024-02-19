@@ -17,8 +17,7 @@ const lockNft = async () => {
 
 	const signedTx = await web3.eth.accounts.signTransaction(tx, config.nftManagerKey);
 	web3.eth.sendSignedTransaction(signedTx.rawTransaction).on('receipt', () => {
-		const domain = window.location.origin;
-		window.location.href = `${domain}/game/index.html`;
+		location.href = './game/index.html';
 	});
 }
 

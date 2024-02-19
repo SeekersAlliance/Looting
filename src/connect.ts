@@ -9,9 +9,7 @@ const connectWallet = async () => {
 	}
 
 	localStorage.setItem('CHALLENGER-ACCOUNT', account);
-
-	const domain = window.location.origin;
-	window.location.href = `${domain}/view-wallet.html`;
+	location.href = './view-wallet.html';
 };
 
 injectHandler('index-connect-button', connectWallet)
