@@ -12,3 +12,11 @@ Therefore, following step is needed to transpile the src:
 ### Development:
 - Run `build build.js watch` to watch/rebuild `js` on changes in `src`
 - Run `bun x lr-http-server` to serve project in http
+
+### Configuration:
+As described above, configuration located under src/utils/config.ts, in there you'll found:
+
+- `contractAddress`: put deployed Smart Contract address (from `contracts/src/Looting.sol`)
+- `nftManagerKey`: private-key (in string formnat) of the NFT Manager account (as we simulate Game Server right inside the front-end for now, which could be relocate/move into dedicate server/api)
+- `nftManagerAddress`: wallet address of the NFT Manager account
+- `challengedAddress`: wallet address of the Challenged account (for now, will be temporarily the `nftManagerAddress`)
