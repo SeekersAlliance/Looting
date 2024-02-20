@@ -194,7 +194,6 @@
     <script>
       window.addEventListener("load", (even) => {
         document.getElementById("character-box").style.cssText = "display: none;";
-        document.getElementById(checkid.id).classList.remove("showt");
       });
 
       function choosechar(){
@@ -205,12 +204,12 @@
       checkchar.addEventListener('click' , function(){
         var checkid = event.target;
         var checkvl = checkid.getAttribute("value");
+        checkchar.querySelectorAll('.character-self-box').forEach(function(element) {
+          element.classList.remove("showt");
+	      });
         document.getElementById(checkid.id).classList.add("showt");
         localStorage.setItem("checkid", checkid.id);
         localStorage.setItem("checkvl", checkvl);
-           setTimeout(() => {
-            window.location.href = "./getcard.html";
-           }, 1000);
       })
 
     </script>
