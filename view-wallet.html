@@ -82,13 +82,14 @@
       }
 
       .character-self-box::after, .character-self-box::before {
-        width: 18.5vw;
-        height: 18.5vw;
+        width: 19%;
+        height: auto;
         content:"";
         background-repeat: no-repeat;
         background-size: contain;
         position: absolute;
         mix-blend-mode: normal;
+        aspect-ratio: 1/1;
       }
       .character-self-box::after {
         opacity: 0;
@@ -167,19 +168,19 @@
     </div>
     <div id="character-box" style="display: none;">
       <div id="character">
-        <div id="char1" class="character-self-box">
+        <div id="char1" value="charN" class="character-self-box">
           <img src="./img/bubble_gunner.png" />
         </div>
-        <div id="char2" class="character-self-box">
+        <div id="char2" value="charR" class="character-self-box">
           <img src="./img/meta_whelp.png" />
         </div>
-        <div id="char3" class="character-self-box">
+        <div id="char3" value="charR" class="character-self-box">
           <img src="./img/double_agent.png" />
         </div>
-        <div id="char4" class="character-self-box">
+        <div id="char4" value="charS" class="character-self-box">
           <img src="./img/morak_galahad.png" />
         </div>
-        <div id="char5" class="character-self-box">
+        <div id="char5" value="charN" class="character-self-box">
           <img src="./img/dragon_speaker.png" />
         </div>
         <div class="character-self-text bg-common bgsize"></div>
@@ -191,20 +192,25 @@
     </div>
     <script src="./js/lockNft.js"></script>
     <script>
+      window.addEventListener("load", (even) => {
+        document.getElementById("character-box").style.cssText = "display: none;";
+        document.getElementById(checkid.id).classList.remove("showt");
+      });
+
       function choosechar(){
-        document.getElementById("character-box").style.display = "flex";
+        document.getElementById("character-box").style.cssText = "display: flex;";
       };
 
       var checkchar = document.querySelector('#character');
       checkchar.addEventListener('click' , function(){
         var checkid = event.target;
+        var checkvl = checkid.getAttribute("value");
         document.getElementById(checkid.id).classList.add("showt");
-        if (checkid.id == "char4"){
-
-          // setTimeout(() => {
-          //   window.location.href = "./game/index.html";
-          // }, 1000);
-        }
+        localStorage.setItem("checkid", checkid.id);
+        localStorage.setItem("checkvl", checkvl);
+           setTimeout(() => {
+            window.location.href = "./getcard.html";
+           }, 1000);
       })
 
     </script>

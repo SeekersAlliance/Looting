@@ -9,42 +9,49 @@
     <link rel="stylesheet" type="text/css" href="./globe.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.5.0/web3.min.js" integrity="sha512-FhAl50BpK3gf9K//lbAWek9EEQEtGQyyXZNc1fuwcC2tVf2cskiJBcumXY0zJksYtms6S5cqubp1MNfUYTkO2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Seekers Alliance</title>
+    <script>
+      var loadCardId = localStorage.getItem("checkid");
+      var loadCardVl = localStorage.getItem("checkvl");
+      window.addEventListener("load", (even) => {
+        document.getElementById(loadCardId).style.cssText = "display: flex;";
+        document.getElementById(loadCardVl).style.cssText = "display: flex;";
+      });
+    </script>
     <style>
-
       #getcard {
         background-image: url("./img/victory_back.png");
         display: flex;
         flex-wrap: nowrap;
         justify-content: flex-start;
         align-content: center;
+        align-items: center;
       }
       #getcard.bgsize {
         background-position: center center;
       }
-      #getcard #getcard-get {
+      #getcard .getcard-get {
         width: 30%;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
         align-content: center;
       }
-      #getcard #getcard-card {
+      #getcard .getcard-card {
         width: 40%;
         display: inline-block;
       }
-      #getcard #getcard-star {
+      #getcard .getcard-star {
         width: 30%;
         display: inline-block;
       }
 
-      #getcard-get img {
+      .getcard-get img {
         height: 25.5%;
         margin-top: 17%;
       }
-      /*#getcard-card img {
+      /*.getcard-card img {
         height: 96%;
-      }
-*/
+      }*/
 
       .card-rainbow, .card-twinkle {
         width: 100%;
@@ -52,7 +59,7 @@
         aspect-ratio: 676 / 1004;
         max-height: 100vh;
         position: relative;
-        display: flex;
+        display: none;
         flex-wrap: wrap;
         justify-content: center;
         align-content: center;
@@ -66,6 +73,7 @@
       /*------------card-raibow------------*/
       .card-rainbow > a > img {
         height: 52.5vw;
+        max-height: 100vh;
       }
       .card-rainbow > a.card-rainbow-c {
         z-index: 5;
@@ -95,14 +103,17 @@
         }
       }
 
-      /*------------card-twinkle------------*/
+      /*------------card-twinkle------------
       .card-twinkle {
         aspect-ratio: 639.93 / 1080;
-      }
+      }*/
       .card-twinkle > img{
         height: 15%;
         margin: 18% 35% 0 0;
         z-index: 10;
+      }
+      .card-twinkle#charR > img{
+        margin: 18% 13% 0 0;
       }
       .card-twinkle > a.card-twinkle-t {
         animation-iteration-count: infinite;
@@ -250,6 +261,10 @@
           height: 50vw;
           max-height: 100vh;
         }
+        .getcard-get img {
+          width: 95%;
+          margin-top: 17%;
+        }
       }
 
       @media (min-aspect-ratio: 2.25 / 1) {
@@ -268,20 +283,38 @@
   </head>
   <body>
     <div id="getcard" class="container-block bgsize">
-      <div id="getcard-get">
+      <div class="getcard-get">
         <img src="./img/card_looted.png" />
       </div>
-      <div id="getcard-card">
-        <div class="card-rainbow">
+      <div class="getcard-card">
+        <div class="card-rainbow" id="char1">
+          <a class="card-rainbow-c"><img src="./img/card_bubble_gunner.png" /></a>
+        </div>
+        <div class="card-rainbow" id="char2">
+          <a class="card-rainbow-c"><img src="./img/card_meta_whelp.png" /></a>
+        </div>
+        <div class="card-rainbow" id="char3">
+          <a class="card-rainbow-c"><img src="./img/card_double_agent.png" /></a>
+        </div>
+        <div class="card-rainbow" id="char4">
           <a class="card-rainbow-c"><img src="./img/card_looted_galahad.png" /></a>
           <a class="card-rainbow-r"><img src="./img/rainbow_back01.png" /></a>
           <a class="card-rainbow-r"><img src="./img/rainbow_back02.png" /></a>
           <a class="card-rainbow-r"><img src="./img/rainbow_back03.png" /></a>
           <a class="card-rainbow-r"><img src="./img/rainbow_back04.png" /></a>
         </div>
+        <div class="card-rainbow" id="char5">
+          <a class="card-rainbow-c"><img src="./img/card_shaman.png" /></a>
+        </div>
       </div>
-      <div id="getcard-star">
-        <div class="card-twinkle">
+      <div class="getcard-star">
+        <div class="card-twinkle" id="charN">
+          <img src="./img/card_common.png" />
+        </div>
+        <div class="card-twinkle" id="charR">
+          <img src="./img/card_uncommon.png" />
+        </div>
+        <div class="card-twinkle" id="charS">
           <img src="./img/card_looted_rare.png" />
           <a class="card-twinkle-t t01"><img src="./img/card_looted_star.png" /></a>
           <a class="card-twinkle-t t02"><img src="./img/card_looted_star.png" /></a>
@@ -298,5 +331,6 @@
    </div>
 
    <script src="./js/unlockNft.js"></script>
+
   </body>
 </html>
