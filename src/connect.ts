@@ -1,6 +1,6 @@
 import { injectHandler } from './utils/helper';
 
-const targetChainConfig = {
+const opBNBChainTarget = {
   chainId: '0x15EB',
   chainName: 'opBNB Testnet',
   nativeCurrency: {
@@ -11,53 +11,54 @@ const targetChainConfig = {
   blockExplorerUrls: ['https://opbnb-testnet.bscscan.com'],
 }
 
-const redirectConnectedPlayer = async () => {
-  const [account] = await window.ethereum.request({ method: 'eth_accounts' });
-
+const ensureNetworkTarget = async (targetConfig: any) => {
   await window.ethereum?.request({
     method: 'wallet_addEthereumChain',
-    params: [targetChainConfig],
+    params: [targetConfig],
   });
 
   await window.ethereum?.request({
     method: 'wallet_switchEthereumChain',
     params: [
       {
-        chainId: targetChainConfig.chainId,
+        chainId: targetConfig.chainId,
       }
     ]
-  }).then(() => {
-    if (account) {
-      localStorage.setItem('CHALLENGER-ACCOUNT', account);
-      window.location.href = './view-wallet.html';
-    }
   });
+};
+
+const hydrateAccount = (account: string) => {
+  localStorage.setItem('CHALLENGER-ACCOUNT', account);
+};
+
+const navigateNext = () => {
+  window.location.href = './view-wallet.html';
+};
+
+const redirectConnectedPlayer = async () => {
+  try {
+    console.log('Seekers version 0.0.3')
+    const [account] = await window.ethereum.request({ method: 'eth_accounts' });
+    if (account) { /* <- if already connected before */
+      await ensureNetworkTarget(opBNBChainTarget);
+      hydrateAccount(account);
+      navigateNext();
+    }
+  } catch (err) {
+    console.log('Unable to retrieve account', err);
+  }
 };
 
 const connectWallet = async () => {
   try {
     const [account] = await window.ethereum?.request({ method: 'eth_requestAccounts' });
-    localStorage.setItem('CHALLENGER-ACCOUNT', account);
-
-    await window.ethereum?.request({
-      method: 'wallet_addEthereumChain',
-      params: [targetChainConfig],
-    });
-
-    await window.ethereum?.request({
-      method: 'wallet_switchEthereumChain',
-      params: [
-        {
-          chainId: targetChainConfig.chainId,
-        },
-      ],
-    }).then(() => {
-      if (account) {
-        window.location.href = './view-wallet.html';
-      }
-    });
+    await ensureNetworkTarget(opBNBChainTarget);
+    if (account) {
+      hydrateAccount(account);
+      navigateNext();
+    }
   } catch (err) {
-    console.log('Unable to retrieve account', err);
+    console.log('Unable to connect', err);
   }
 };
 
