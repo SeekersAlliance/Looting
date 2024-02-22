@@ -37,7 +37,7 @@ const navigateNext = () => {
 
 const redirectConnectedPlayer = async () => {
   try {
-    console.log('Seekers version 0.0.3')
+    console.log('Seekers version 0.0.13')
     const [account] = await window.ethereum.request({ method: 'eth_accounts' });
     if (account) { /* <- if already connected before */
       await ensureNetworkTarget(opBNBChainTarget);
