@@ -9,11 +9,10 @@ This smart contract introduces a new type of ERC-1155 token: the lockable ERC-11
 - Locked tokens cannot be transferred until expired or unlocked.
 
 #### Functions
-`function setApprovalForLock(address locker, bool approved) external;`: Approves the locker to lock the token.
-`function lock(address account, uint256 id, uint256 locknum, uint256 expired) external;`: Locks the token id of an account.
-`function unlock(address account, uint256 id, uint256 unlocknum) external;`: Unlocks the token id of an account.
+`function setApprovalForLock(address locker, bool approved) external;`: Approves the locker to lock the token.  
+`function lock(address account, uint256 id, uint256 locknum, uint256 expired) external;`: Locks the token id of an account.  
+`function unlock(address account, uint256 id, uint256 unlocknum) external;`: Unlocks the token id of an account.  
 `function unlockAndTransfer(address from, address to, uint256 id, uint256 unlockNum, uint256 transferNum, bytes memory data) external;`: Unlocks the token id of `from` address and transfers the tokens to `to` address.
-
 #### Conclusion
 This EIP is a powerful tool that can be used to add functionality to ERC-1155 tokens. It is flexible and can be used in a variety of use cases.
 
