@@ -23,7 +23,7 @@ This smart contract implements a looting game using ERC-2266: Looting. The key f
 - When a battle starts, the manager locks the challenged player's tokens to prevent them from transferring tokens before the battle ends, which can prevent cheating.
 - When a player wins a battle, the manager call `unlockAndTransfer` to unlock and transfer the defeated player's tokens to the winner.
 #### Flow Chart
-![alt text](./flowchart.jpg?raw=true "Looting Flow Chart") 
+![alt text](./flowchart.jpg?raw=true "Flow Chart") 
 
 ---
 ## Frontend
