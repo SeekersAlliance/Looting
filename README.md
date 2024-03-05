@@ -20,8 +20,8 @@ This extension is a powerful tool that can be used to add functionality to ERC-1
 ### Looting: Implementation of LockableERC1155
 #### Overview
 This smart contract implements a "looting" game using LockableERC1155. Its key features are: 
-- Manager role: This role can `lock` all players' tokens without the permission of the `isApprovalForLock`. This implementation increases the general user experience since players do not have to constantly expend gas to approve for locking before playing each game.
-- When a battle starts, the manager locks the challenged player's targeted token(s) to prevent them from transferring or selling the tokens before the battle ends, preventing cheating.
+- Manager role: This role can `lock` all players' tokens minted by this contract without the permission of the `isApprovalForLock`. This implementation increases the general user experience since players do not have to constantly expend gas to approve for locking before playing each game.
+- When a battle starts, the manager locks the challenged player's targeted token(s) to prevent them from transferring or selling the token(s) before the battle ends, preventing players from cheating.
 - When a player wins a battle, the manager calls `unlockAndTransfer` to unlock and transfer the defeated player's token(s) to the winner.
 #### User Flow
 ![Flow Chart](./flowchart.jpg?raw=true) 
