@@ -28,7 +28,7 @@ This smart contract implements a "looting" game using LockableERC1155. Its key f
 
 ---
 ## Frontend
-### Javascript build 
+### Javascript Build 
 Javascript under src folder is written in Typescript, which should be transpiled to legacy javascript for execution in Browser.
 Follow the steps below to transpile the src:
 
@@ -42,9 +42,9 @@ Follow the steps below to transpile the src:
 - Run `bun x lr-http-server` to serve project in http
 
 ### Configuration:
-As described above, configurations are located in src/utils/config.ts, where you will find:
+Configurations are located in src/utils/config.ts, where you will find:
 
-- `contractAddress`: deployed looting smart contract address (from `contracts/src/Looting.sol`)
-- `nftManagerKey`: private-key (in string format) of the NFT Manager's account (We simulate the Game Server inside the frontend for now, it should be relocate/move into dedicate server/api in a production setup)
+- `contractAddress`: deployed Looting smart contract address (from `contracts/src/Looting.sol`)
+- `nftManagerKey`: private-key (in string format) of the NFT Manager's account (We simulate the Game Server inside the frontend for now, it should be relocated/moved into dedicate server/api in a production setup)
 - `nftManagerAddress`: wallet address of the NFT Manager account
-- `challengedAddress`: wallet address of the Challenged account (we have set it to `nftManagerAddress` for the convenience of this demo)
+- `challengedAddress`: wallet address of the Challenged account (We have set it to `nftManagerAddress` for the convenience, but can be any address.)
