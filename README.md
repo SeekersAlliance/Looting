@@ -5,7 +5,7 @@
 #### Introduction
 This smart contract introduces a new type of ERC-1155 token: the LockableERC-1155 token. Its main features are:
 - Token owners can call `approveLock` to approve other addresses to lock their ERC-1155 tokens. Only addresses with approved lock can call lock-related functions.
-- The struct `lockStatus` stores the locker address, lock number, and expiration time for each token ID. Other lockers cannot lock the token until the expiration time is reached or the token has been unlocked.
+- The struct `lockStatus` stores the locker address, lock amount, and expiration time for each token ID. Other lockers cannot lock the token until the expiration time is reached or the token has been unlocked.
 - Locked tokens cannot be transferred until after expiration or explicitly unlocked.
 
 #### Functions
