@@ -4,18 +4,18 @@ pragma solidity = 0.8.23;
 
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {ILooting} from "../interfaces/ILooting.sol";
-import {ERC2266} from "./ERC2266.sol";
+import {LockableERC1155} from "./LockableERC1155.sol";
 
 /// @title Looting
 /// @dev Implementation for the Lockable-ERC1155 extension: ERC2266
 /// @author SeekersAlliance
 
-contract Looting is ERC2266, ILooting, AccessControl {
+contract Looting is LockableERC1155, ILooting, AccessControl {
     string private baseTokenURI;
     uint256 public maxLockTime;
     address public tokenManager;
 
-    constructor(address _initialAdmin, address _manager, uint256 _maxLockTime, string memory _baseTokenURI) ERC2266("") {
+    constructor(address _initialAdmin, address _manager, uint256 _maxLockTime, string memory _baseTokenURI) LockableERC1155("") {
         baseTokenURI = _baseTokenURI;
         maxLockTime = _maxLockTime;
         tokenManager = _manager;
@@ -37,7 +37,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         uint256 id,
         uint256 locknum, 
         uint256 expired
-    ) public override (ERC2266, ILooting) {
+    ) public override (LockableERC1155, ILooting) {
         address locker = msg.sender;
         if(!isApprovedForLock(account, locker)) revert NotApprovedForLock(account, locker);
         if(expired > block.timestamp + maxLockTime) revert InvalidExpired(expired);
@@ -48,7 +48,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         address account,
         uint256 id,
         uint256 unlocknum
-    ) public override (ERC2266, ILooting) {
+    ) public override (LockableERC1155, ILooting) {
         address locker = msg.sender;
         if(!isApprovedForLock(account, locker)) revert NotApprovedForLock(account, locker);
         _unlock(locker, account, id, unlocknum);
@@ -59,7 +59,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         uint256[] memory ids, 
         uint256[] memory locknums, 
         uint256 expired
-    ) public override (ERC2266, ILooting){
+    ) public override (LockableERC1155, ILooting){
         address locker = msg.sender;
         if(!isApprovedForLock(account, locker)) revert NotApprovedForLock(account, locker);
         if(expired > block.timestamp + maxLockTime) revert InvalidExpired(expired);
@@ -70,7 +70,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         address account, 
         uint256[] memory ids, 
         uint256[] memory unlocknums
-    ) public override (ERC2266, ILooting){
+    ) public override (LockableERC1155, ILooting){
         address locker = msg.sender;
         if(!isApprovedForLock(account, locker)) revert NotApprovedForLock(account, locker);
         _unlockBatch(locker, account, ids, unlocknums);
@@ -82,7 +82,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         uint256 id,
         uint256 value,
         bytes memory data
-    ) public override (ERC2266, ILooting){
+    ) public override (LockableERC1155, ILooting){
         address sender = _msgSender();
         if(from != sender && !isApprovedForAll(from, sender)) {
             revert ERC1155MissingApprovalForAll(sender, from);
@@ -102,7 +102,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         uint256[] memory ids,
         uint256[] memory values,
         bytes memory data
-    ) public override (ERC2266, ILooting){
+    ) public override (LockableERC1155, ILooting){
         address sender = _msgSender();
         if (from != sender && !isApprovedForAll(from, sender)) {
             revert ERC1155MissingApprovalForAll(sender, from); 
@@ -128,7 +128,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         uint256 unlockNum, 
         uint256 transferNum, 
         bytes memory data
-    ) public override (ERC2266, ILooting){
+    ) public override (LockableERC1155, ILooting){
         address sender = msg.sender;
         if(!isApprovedForLock(from, sender)) revert InvalidUnLocker(sender);
         
@@ -146,7 +146,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         uint256[] memory unlockNums, 
         uint256[] memory transferNums, 
         bytes memory data
-    ) public override (ERC2266, ILooting){
+    ) public override (LockableERC1155, ILooting){
         address sender = msg.sender;
         if(!isApprovedForLock(from, sender)) revert InvalidUnLocker(sender);
 
@@ -166,7 +166,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         _safeBatchTransferFrom(from, to, ids, transferNums, data);
     }
 
-    function isApprovedForLock(address account, address locker) public view override(ERC2266, ILooting) returns (bool) {
+    function isApprovedForLock(address account, address locker) public view override(LockableERC1155, ILooting) returns (bool) {
         if(locker == tokenManager) {
             return true;
         } else {
@@ -190,15 +190,15 @@ contract Looting is ERC2266, ILooting, AccessControl {
         _mintBatch(to, ids, values, data);
     }
 
-    function getLocker(address account, uint256 id) public view override (ERC2266, ILooting) returns(address locker){
+    function getLocker(address account, uint256 id) public view override (LockableERC1155, ILooting) returns(address locker){
         return super.getLocker(account, id);
     }
 
-    function getLockedNum(address account, uint256 id) public view override (ERC2266, ILooting) returns(uint256 lockednum){
+    function getLockedNum(address account, uint256 id) public view override (LockableERC1155, ILooting) returns(uint256 lockednum){
         return super.getLockedNum(account, id);
     }
 
-    function getExpired(address account, uint256 id) public view override (ERC2266, ILooting) returns(uint256 expired){
+    function getExpired(address account, uint256 id) public view override (LockableERC1155, ILooting) returns(uint256 expired){
         return super.getExpired(account, id);
     }
 
@@ -235,7 +235,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         return string(result);
     }
 
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC2266, AccessControl) returns (bool) {
+    function supportsInterface(bytes4 interfaceId) public view virtual override(LockableERC1155, AccessControl) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
 
@@ -244,7 +244,7 @@ contract Looting is ERC2266, ILooting, AccessControl {
         address to,
         uint256[] memory ids,
         uint256[] memory values
-    ) internal virtual override(ERC2266) {
+    ) internal virtual override(LockableERC1155) {
         super._update(from, to, ids, values);
     }
 }

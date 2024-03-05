@@ -4,8 +4,9 @@ pragma solidity = 0.8.23;
 
 /// @title Interface for Looting
 /// @author SeekersAlliance 
+import {ILockableERC1155} from "./ILockableERC1155.sol";
 
-interface ILooting {
+interface ILooting is ILockableERC1155 {
 
     event SetMaxLockTime(uint256 time);
     event SetTokenManager(address manager);

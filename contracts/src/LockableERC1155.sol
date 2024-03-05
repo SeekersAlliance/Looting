@@ -3,13 +3,13 @@
 pragma solidity = 0.8.23;
 
 import {ERC1155} from "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "../interfaces/IERC2266.sol";
+import "../interfaces/ILockableERC1155.sol";
 
-/// @title ERC2266: Lockable Extension for ERC1155
-/// @dev Implementation for the Lockable extension ERC2266 for ERC1155
+/// @title Extension: Lockable ERC1155
+/// @dev Implementation of the Lockable extension for ERC1155
 /// @author SeekersAlliance
 
-contract ERC2266 is ERC1155, IERC2266{
+contract LockableERC1155 is ERC1155, ILockableERC1155{
 
     mapping(address account => mapping(address locker => bool)) private lockerApprovals;
     mapping(address account => mapping(uint256 id => LockStatus)) internal lockStatus;
@@ -19,20 +19,26 @@ contract ERC2266 is ERC1155, IERC2266{
         uint256 lockednum;
         uint256 expired;
     }
-
+    
+    /* 
+     * @param _baseTokenURI base URI of tokens. 
+     */
     constructor(string memory _baseTokenURI) ERC1155("") {
         _setURI(_baseTokenURI);
     }
 
+    /// @inheritdoc ILockableERC1155
     function setApprovalForLock(address locker, bool approved) external virtual {
         _setApprovalForLock(msg.sender, locker, approved);
         _setApprovalForAll(msg.sender, locker, approved);
     }
 
+    /// @inheritdoc ILockableERC1155
     function isApprovedForLock(address account, address locker) public view virtual returns (bool) {
         return lockerApprovals[account][locker];
     }
 
+    /// @inheritdoc ILockableERC1155
     function lock(
         address account, 
         uint256 id,
@@ -44,6 +50,7 @@ contract ERC2266 is ERC1155, IERC2266{
         _lock(locker, account, id, locknum, expired);
     }
 
+    /// @inheritdoc ILockableERC1155
     function unlock(
         address account, 
         uint256 id, 
@@ -54,6 +61,7 @@ contract ERC2266 is ERC1155, IERC2266{
         _unlock(locker, account, id, unlocknum);
     }
 
+    /// @inheritdoc ILockableERC1155
     function lockBatch(
         address account, 
         uint256[] memory ids, 
@@ -65,6 +73,7 @@ contract ERC2266 is ERC1155, IERC2266{
         _lockBatch(locker, account, ids, locknums, expired);
     }
 
+    /// @inheritdoc ILockableERC1155
     function unlockBatch(
         address account, 
         uint256[] memory ids, 
@@ -75,13 +84,14 @@ contract ERC2266 is ERC1155, IERC2266{
         _unlockBatch(locker, account, ids, unlocknums);
     }
 
+    /// @inheritdoc ILockableERC1155
     function safeTransferFrom(
         address from,
         address to,
         uint256 id,
         uint256 value,
         bytes memory data
-    ) public virtual override(ERC1155, IERC2266) {
+    ) public virtual override(ERC1155, ILockableERC1155) {
         address sender = _msgSender();
         if(from != sender && !isApprovedForAll(from, sender)) {
             revert ERC1155MissingApprovalForAll(sender, from);
@@ -93,13 +103,14 @@ contract ERC2266 is ERC1155, IERC2266{
         _safeTransferFrom(from, to, id, value, data);
     }
 
+    /// @inheritdoc ILockableERC1155
     function safeBatchTransferFrom(
         address from,
         address to,
         uint256[] memory ids,
         uint256[] memory values,
         bytes memory data
-    ) public virtual override(ERC1155, IERC2266) {
+    ) public virtual override(ERC1155, ILockableERC1155) {
         address sender = _msgSender();
         if (from != sender && !isApprovedForAll(from, sender)) {
             revert ERC1155MissingApprovalForAll(sender, from); 
@@ -116,6 +127,7 @@ contract ERC2266 is ERC1155, IERC2266{
         _safeBatchTransferFrom(from, to, ids, values, data);
     }
 
+    /// @inheritdoc ILockableERC1155
     function unlockAndTransfer(
         address from, 
         address to, 
@@ -134,6 +146,7 @@ contract ERC2266 is ERC1155, IERC2266{
         _safeTransferFrom(from, to, id, transferNum, data);
     }
 
+    /// @inheritdoc ILockableERC1155
     function unlockAndTransferBatch(
         address from, 
         address to, 
@@ -159,16 +172,19 @@ contract ERC2266 is ERC1155, IERC2266{
         _safeBatchTransferFrom(from, to, ids, transferNums, data);
     }
 
+    /// @inheritdoc ILockableERC1155
     function getLocker(address account, uint256 id) public view virtual returns(address locker){
         if(!_isLocked(account, id)) return address(0);
         return lockStatus[account][id].locker;
     }
 
+    /// @inheritdoc ILockableERC1155
     function getLockedNum(address account, uint256 id) public view virtual returns(uint256 lockednum){
         if(!_isLocked(account, id)) return 0;
         return lockStatus[account][id].lockednum;
     }
 
+    /// @inheritdoc ILockableERC1155
     function getExpired(address account, uint256 id) public view virtual returns(uint256 expired){
         if(!_isLocked(account, id)) return 0;
         return lockStatus[account][id].expired;
