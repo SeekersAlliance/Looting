@@ -2,14 +2,30 @@
   "name": "looting",
   "module": "index.ts",
   "scripts": {
-    "bundle": "bun build.js",
-    "dev": "bun build.js watch"
+    "dev": "metacraft",
+    "build": "metacraft bundle"
+  },
+  "dependencies": {
+    "big-integer": "^1.6.52",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.2",
+    "styled-components": "^6.1.8",
+    "web3": "^4.5.0"
   },
   "devDependencies": {
     "@openzeppelin/contracts": "^5.0.1",
     "@types/bun": "latest",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.20",
+    "@walless/eslint-config": "^0.0.7",
+    "@walless/tsconfig": "^0.0.1",
     "chokidar": "^3.6.0",
-    "hardhat": "^2.20.1"
+    "copy-webpack-plugin": "^12.0.2",
+    "eslint": "^8.57.0",
+    "hardhat": "^2.20.1",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

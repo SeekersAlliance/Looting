@@ -1,0 +1,106 @@
+html,
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	/*overflow: hidden;*/
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	background-color: #000000;
+}
+
+img {
+	border: 0px;
+}
+
+a,
+a:hover,
+a:active {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.bgsize {
+	background-size: 100% auto;
+	-webkit-background-size: 100% auto;
+	-moz-background-size: 100% auto;
+	-o-background-size: 100% auto;
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+
+.web-line {
+	margin: 0px auto;
+}
+
+.web-button {
+	margin: 0px auto;
+}
+
+
+#index,
+#v-wallet,
+#character-box,
+#loading,
+#getcard,
+.container-block {
+	width: 100%;
+	height: auto;
+	min-width: 1000px;
+	max-height: 100vh;
+	aspect-ratio: 16 / 9;
+	background-color: black;
+}
+
+
+@keyframes checkgo1 {
+	50% {
+		opacity: 1;
+	}
+
+	70% {
+		opacity: 1;
+	}
+
+	72% {
+		opacity: 0;
+	}
+
+	89% {
+		opacity: 0;
+	}
+
+	90% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes checkgo2 {
+	0% {
+		opacity: 1;
+		transform: scale(2);
+	}
+
+	50% {
+		transform: scale(2.5);
+	}
+
+	75% {
+		transform: scale(1.25);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@media screen and (max-width:998px) {
+	.character-self-box::before {
+		margin: 5.5vw 0 0 0.7%;
+	}
+}
